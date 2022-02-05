@@ -1,3 +1,3 @@
 # MerkleTree
 
-A description of this package.
+This package implements all the elements to generate a Merkle tree.
