@@ -14,19 +14,19 @@ extension TreeFactory: MerkleTreeCreating {
             throw(MerkleTreeError.empty("You should have at least one set of data to create a merkle tree"))
         }
         let merkleTreeHeight = ceil(log2(Double(data.count)))
-        var leafsArray: [TreeNode] = data.map { MerkleTreeNode(stringData: $0) }
+        var treeNodes: [TreeNode] = data.map { MerkleTreeNode(stringData: $0) }
         
-        while leafsArray.count != 1 {
-            var newLeafsArray = [TreeNode]()
-            while leafsArray.count > 0 {
-                let leftNode  = leafsArray.removeFirst()
-                let rightNode = leafsArray.count > 0 ? leafsArray.removeFirst() : leftNode
-                newLeafsArray.append(createNextLevelNode(with: leftNode, and: rightNode))
+        while treeNodes.count != 1 {
+            var newTreeNodes = [TreeNode]()
+            while treeNodes.count > 0 {
+                let leftNode  = treeNodes.removeFirst()
+                let rightNode = treeNodes.count > 0 ? treeNodes.removeFirst() : leftNode
+                newTreeNodes.append(createNextLevelNode(with: leftNode, and: rightNode))
             }
-            leafsArray = newLeafsArray
+            treeNodes = newTreeNodes
         }
         
-        return MerkleTree(treeGraph: leafsArray, height: merkleTreeHeight)
+        return MerkleTree(treeGraph: treeNodes, height: merkleTreeHeight)
     }
 }
 
