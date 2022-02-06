@@ -20,7 +20,7 @@ extension TreeFactory: MerkleTreeCreating {
             var newTreeNodes = [TreeNode]()
             while treeNodes.count > 0 {
                 let leftNode  = treeNodes.removeFirst()
-                let rightNode = treeNodes.count > 0 ? treeNodes.removeFirst() : leftNode
+                let rightNode = treeNodes.count > 0 ? treeNodes.removeFirst() : MerkleTreeNode(hash: leftNode.hash)
                 newTreeNodes.append(createNextLevelNode(with: leftNode, and: rightNode))
             }
             treeNodes = newTreeNodes

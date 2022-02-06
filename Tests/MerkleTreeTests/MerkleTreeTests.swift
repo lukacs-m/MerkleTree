@@ -52,4 +52,25 @@ final class MerkleTreeTests: XCTestCase {
         XCTAssertEqual(tree.level(at: 2), level2Hashs)
         XCTAssertEqual(tree.level(at: 3).count, 0, "Should be 0 because the level ask is out of bound compare to the tree")
     }
+    
+    func test_merkleTreeOddLevelContent_withData_shouldHaveTheCorrectArrayOfHash() throws {
+        let data = DataContentStubFactory.createStringData(with: 5)
+        guard let tree = try? treeFactory.createMerkleTree(with: data) else {
+           return XCTFail("Should be able to crete a merkle tree")
+        }
+        let level3Hashs = [data[0].sha256, data[1].sha256, data[2].sha256, data[3].sha256, data[4].sha256, data[4].sha256]
+        let level2Hashs = [(level3Hashs[0] + level3Hashs[1]).sha256, (level3Hashs[2] + level3Hashs[3]).sha256,
+                           (level3Hashs[4] + level3Hashs[5]).sha256, (level3Hashs[4] + level3Hashs[5]).sha256]
+        let level1Hashs = [(level2Hashs[0] + level2Hashs[1]).sha256, (level2Hashs[2] + level2Hashs[3]).sha256]
+        let level0Hashs = [(level1Hashs[0] + level1Hashs[1]).sha256]
+
+        XCTAssertEqual(tree.level(at: 0).count, 1)
+        XCTAssertEqual(tree.level(at: 0), level0Hashs)
+        XCTAssertEqual(tree.level(at: 1).count, 2)
+        XCTAssertEqual(tree.level(at: 1), level1Hashs)
+        XCTAssertEqual(tree.level(at: 2).count, 4)
+        XCTAssertEqual(tree.level(at: 2), level2Hashs)
+        XCTAssertEqual(tree.level(at: 3).count, 6)
+        XCTAssertEqual(tree.level(at: 3), level3Hashs)
+    }
 }
