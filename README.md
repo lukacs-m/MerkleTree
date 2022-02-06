@@ -35,7 +35,7 @@ Then just `import MerkleTree` in your files.
 
 The first step you need to take is to instanciate a **TreeFactory**.
 After that you only need to call the `createMerkeTree` function passing it a array of string as data.
-Note that it will through an error if the array is empty
+Note that it will throw an error if the array is empty
 
 ```swift
 // Default
