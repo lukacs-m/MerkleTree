@@ -16,12 +16,8 @@ public struct MerkleTreeNode: TreeNode {
     public init(stringData: String) {
         self.hash = stringData.sha256
     }
-    
-    public init(hash: String) {
-        self.hash = hash
-    }
-    
-    public init(hash: String, left: TreeNode, right: TreeNode) {
+      
+    public init(hash: String, left: TreeNode? = nil, right: TreeNode? = nil) {
         self.hash = hash
         self.left = left
         self.right = right
