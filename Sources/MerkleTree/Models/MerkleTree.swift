@@ -6,7 +6,7 @@
 //
 
 /// A merkle tree implementing the `TreeProcessing` protocol
-public final class MerkleTree: TreeProcessing {
+public struct MerkleTree: TreeProcessing {
     let treeGraph: [TreeNode]
 
     public let height: Double

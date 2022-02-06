@@ -8,7 +8,7 @@
 import Foundation
 
 /// Implementation of a `TreeNode` as a merkle tree node
-final public class MerkleTreeNode: TreeNode {
+public struct MerkleTreeNode: TreeNode {
     public var hash: String
     public var left: TreeNode?
     public var right: TreeNode?
