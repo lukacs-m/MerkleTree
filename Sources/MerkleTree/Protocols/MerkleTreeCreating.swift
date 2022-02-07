@@ -8,4 +8,5 @@
 /// Protocol use for merkle tree creation comformance
 public protocol MerkleTreeCreating {
     func createMerkleTree(with stringData: [String]) throws -> TreeProcessing
+    func createRealMerkleTree(with data: [String]) throws -> TreeProcessing 
 }

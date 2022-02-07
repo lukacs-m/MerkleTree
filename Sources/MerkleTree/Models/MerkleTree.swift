@@ -9,12 +9,12 @@
 public struct MerkleTree: TreeProcessing {
     let treeGraph: [TreeNode]
 
-    public let height: Double
+    public let height: Int
     public var root: TreeNode {
         treeGraph.first!
     }
     
-    init(treeGraph: [TreeNode], height: Double) {
+    init(treeGraph: [TreeNode], height: Int) {
         self.height = height
         self.treeGraph = treeGraph
     }

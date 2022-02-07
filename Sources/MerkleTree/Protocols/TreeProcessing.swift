@@ -7,7 +7,7 @@
 
 /// Base generic protocol for a tree implementation
 public protocol TreeProcessing {
-    var height: Double { get }
+    var height: Int { get }
     var root: TreeNode { get }
     func level(at index: Int) -> [String]
 }

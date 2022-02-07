@@ -42,7 +42,8 @@ Note that it will throw an error if the array is empty
 let treeFactory = TreeFactory()
 let fakeData = ["data1", "data2"]
 
-let merkleTree = treeFactory.createMerkleTree(with: fakeData)
+let merkleTreeV1 = treeFactory.createMerkleTree(with: fakeData)
+let merkleTreeV2 = treeFactory.createRealMerkleTree(with: fakeData)
 ```
 
 ### Get some tree information
@@ -59,6 +60,10 @@ let height = merkleTree.height
 //Get node hashes from a specific level
 let hashArray = merkleTree.level(at: 1)
 ```
+
+The factory can create two types of Merkle tree that don't process the odd nodes the same way.
+The `createMerkleTree` function returns a merkle tree taht when containing odd numbers of node will pump the hash of the child node to the parent.
+The `createRealMerkleTree` function treas the odd node in a different way. It will duplicate the child node hash et create a hash from the addition of the childs duplicated hash value. This results in a parent having a different hash from it single  child.
 
 ## Testing
 
