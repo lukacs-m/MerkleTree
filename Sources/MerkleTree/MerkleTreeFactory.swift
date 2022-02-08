@@ -21,7 +21,7 @@ extension TreeFactory: MerkleTreeCreating {
     /// In this merkle tree the node with only one child have a hash equal to `(child.hash + child.hash).sha256`
     /// - Parameter data: The array of string used as the base of the merkle tree
     /// - Returns: A merkle tree conforming to the `TreeProcessing` protocol. Returns a `MerkleTreeError` in case of empty data.
-    public func createRealMerkleTree(with data: [String]) throws -> TreeProcessing {
+    public func createCommonMerkleTree(with data: [String]) throws -> TreeProcessing {
         guard !data.isEmpty else {
             throw(MerkleTreeError.empty("You should have at least one set of data to create a merkle tree"))
         }
@@ -31,6 +31,11 @@ extension TreeFactory: MerkleTreeCreating {
 
 // MARK: - Utils
 private extension TreeFactory {
+    /// Create a Merkle tree
+    /// - Parameters:
+    ///   - data: The data to compute the tree
+    ///   - oddNodeSimplification: A boolean that must be set do modifie the odd node hashing
+    /// - Returns: A merkle tree responding to the `TreeProcessing` protocol.
     func createTree(with data: [String], and oddNodeSimplification: Bool = true) -> TreeProcessing {
         var treeNodes: [TreeNode] = data.map { MerkleTreeNode(stringData: $0) }
         

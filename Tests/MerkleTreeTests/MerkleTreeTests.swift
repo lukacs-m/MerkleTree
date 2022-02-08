@@ -6,19 +6,19 @@ final class MerkleTreeTests: XCTestCase {
     
     // MARK: - Real merkle tree
     func test_realMerkleTreeCreation_withEmptyData_shouldThrowError() throws {
-        XCTAssertThrowsError(try treeFactory.createRealMerkleTree(with: [])) { error in
+        XCTAssertThrowsError(try treeFactory.createCommonMerkleTree(with: [])) { error in
             XCTAssertTrue(error is MerkleTreeError)
         }
     }
     
     func test_realMerkleRealTreeCreation_withData_shouldCreateAValidTree() throws {
-        XCTAssertNoThrow(try treeFactory.createRealMerkleTree(with: DataContentStubFactory.createStringData(with: 2)))
+        XCTAssertNoThrow(try treeFactory.createCommonMerkleTree(with: DataContentStubFactory.createStringData(with: 2)))
     }
     
     func test_realMerkleTreeHeight_withData_shouldReturnCorrectHeight() throws {
-        guard let treeWith2Level = try? treeFactory.createRealMerkleTree(with: DataContentStubFactory.createStringData(with: 4)),
-        let treeWith3LevelwithOddData = try? treeFactory.createRealMerkleTree(with: DataContentStubFactory.createStringData(with: 5)),
-        let treeWith3LevelwithEvenData = try? treeFactory.createRealMerkleTree(with: DataContentStubFactory.createStringData(with: 6)) else {
+        guard let treeWith2Level = try? treeFactory.createCommonMerkleTree(with: DataContentStubFactory.createStringData(with: 4)),
+        let treeWith3LevelwithOddData = try? treeFactory.createCommonMerkleTree(with: DataContentStubFactory.createStringData(with: 5)),
+        let treeWith3LevelwithEvenData = try? treeFactory.createCommonMerkleTree(with: DataContentStubFactory.createStringData(with: 6)) else {
             XCTFail("Should be able to crete a merkle tree")
             return
         }
@@ -29,7 +29,7 @@ final class MerkleTreeTests: XCTestCase {
     
     func test_realMerkleTreeRootNode_withData_shouldHaveTheCorrectHash() throws {
         let data = DataContentStubFactory.createStringData(with: 2)
-        guard let tree = try? treeFactory.createRealMerkleTree(with: data) else {
+        guard let tree = try? treeFactory.createCommonMerkleTree(with: data) else {
            return XCTFail("Should be able to crete a merkle tree")
         }
         let hash = (data[0].sha256 + data[1].sha256).sha256
@@ -47,7 +47,7 @@ final class MerkleTreeTests: XCTestCase {
     
     func test_realMerkleTreeLevelContent_withData_shouldHaveTheCorrectArrayOfHash() throws {
         let data = DataContentStubFactory.createStringData(with: 4)
-        guard let tree = try? treeFactory.createRealMerkleTree(with: data) else {
+        guard let tree = try? treeFactory.createCommonMerkleTree(with: data) else {
            return XCTFail("Should be able to crete a merkle tree")
         }
         let level2Hashs = [data[0].sha256, data[1].sha256, data[2].sha256, data[3].sha256]
@@ -65,7 +65,7 @@ final class MerkleTreeTests: XCTestCase {
     
     func test_realMerkleTreeOddLevelContent_withData_shouldHaveTheCorrectArrayOfHash() throws {
         let data = DataContentStubFactory.createStringData(with: 5)
-        guard let tree = try? treeFactory.createRealMerkleTree(with: data) else {
+        guard let tree = try? treeFactory.createCommonMerkleTree(with: data) else {
            return XCTFail("Should be able to crete a merkle tree")
         }
         let level3Hashs = [data[0].sha256, data[1].sha256, data[2].sha256, data[3].sha256, data[4].sha256]
